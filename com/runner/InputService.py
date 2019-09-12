@@ -54,3 +54,20 @@ class InputService:
         print(f'Player Tile input is : {player_tile_input}')
         self.game_board[int(player_tile_input)] = selected_player.move_style
         self.available_tiles.pop(self.available_tiles.index(int(player_tile_input)))
+
+    @staticmethod
+    def ask_play_again():
+        options = ('Y', 'N')
+        while True:
+            play_again_input = input('Do You want to play another game ? Y/N\n')
+            if play_again_input.isdigit() or play_again_input.upper() not in options:
+                print(f'Incorrect input, please choose an option from : {options}')
+                continue
+            else:
+                break
+
+        return play_again_input
+
+    def reset_board(self):
+        self.game_board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        self.available_tiles = list(range(1, 10))

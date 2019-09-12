@@ -37,8 +37,11 @@ class DisplayService:
             self.print_board_row(row, game_board)
 
     @staticmethod
-    def show_game_result(winning_player):
+    def show_game_result(winning_player, winning_row, game_history):
         if winning_player is None:
+            game_history['draw'] += 1
             print(Fore.BLUE + 'Its a stalemate...' + Style.RESET_ALL)
         else:
-            print(Fore.GREEN + f'{winning_player.name} wins this game !' + Style.RESET_ALL)
+            game_history[winning_player.name] += 1
+            print(Fore.GREEN + f'{winning_player.name} wins this game !')
+            print(f'winning tiles = {winning_row}' + Style.RESET_ALL)
