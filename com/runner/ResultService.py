@@ -16,6 +16,10 @@ class ResultService:
                 self.win_evaluation_result = True
 
     def determine_winner(self, game_board):
+
+        if len(self.winning_row) == 0:
+            return
+
         if game_board[self.winning_row[0]] == self.player_1.move_style:
             self.winning_player = self.player_1
         else:
