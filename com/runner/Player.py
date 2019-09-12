@@ -1,18 +1,26 @@
+import random
+
+from colorama import Fore, Style
+
+color_dictionary = (Fore.MAGENTA, Fore.BLUE)
+used_colors = []
+
+
 class Player:
-    name = ''
-    move_style = ''
-    move_color = ''
-    info_color = ''
 
-    def __init__(self, name):
+    def __init__(self, name, move_style, color):
         self.name = name
+        self.move_style = move_style
+        self.color = color
 
-    def set_move_style(self, style):
-        self.move_style = style
+    @classmethod
+    def player_from_input(cls, name, move_style):
+        rand_item = random.choice(color_dictionary)
+        while rand_item in used_colors:
+            rand_item = random.choice(color_dictionary)
 
-    def colorize_player(self, color):
-        self.move_color = color['bold']
-        self.info_color = color['normal']
+        used_colors.append(rand_item)
+        return cls(name, move_style, rand_item)
 
     def __str__(self):
-        return f'\033{self.info_color}Player details - name: {self.name}, move_style: {self.move_style} \033[0:30m'
+        return f'{self.color}Player details - name: {self.name}, move_style: {self.move_style}, color: {self.color} ' + Style.RESET_ALL
