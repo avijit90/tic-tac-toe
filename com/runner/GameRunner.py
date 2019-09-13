@@ -35,7 +35,10 @@ while True:
     play_again = run_game()
     if play_again.upper() == 'N':
         print('Game ends.. Bye !')
-        print(game_history)
+        print('-----------------------------------------------')
+        for name in game_history:
+            print(f'|          {name}       |         {game_history[name]}           |')
+        print('-----------------------------------------------')
         break
     else:
         print('\n' * 10)
