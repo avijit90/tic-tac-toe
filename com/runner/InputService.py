@@ -13,7 +13,7 @@ class InputService:
     def get_player_names():
         player_1_name_input = input("Player 1 - Please enter you name\n")
         player_2_name_input = input("Player 2 - Please enter you name\n")
-        return player_1_name_input, player_2_name_input
+        return player_1_name_input.title(), player_2_name_input.title()
 
     @staticmethod
     def get_player_move_choice(player_1):
@@ -42,7 +42,7 @@ class InputService:
 
     def play_moves(self, selected_player):
         print(selected_player.color)
-        player_tile_input = input('Please choose a tile to play.\n')
+        player_tile_input = input(f'{selected_player.name}, please choose a tile to play.\n')
         print(Style.RESET_ALL)
 
         while not player_tile_input.isdigit() or int(player_tile_input) not in self.available_tiles:

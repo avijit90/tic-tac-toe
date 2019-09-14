@@ -6,9 +6,6 @@ from ResultService import ResultService
 
 
 def run_game():
-    display_service = DisplayService(player_1, player_2)
-    display_service.display_board(input_service.game_board)
-
     result_service = ResultService(player_1, player_2)
     style_switch = True
     while len(input_service.available_tiles) > 0:
@@ -22,7 +19,7 @@ def run_game():
         style_switch = not style_switch
 
     result_service.determine_winner(input_service.game_board)
-    display_service.show_game_result(result_service.winning_player, result_service.winning_row, game_history)
+    display_service.show_game_result(result_service.winning_player, result_service.winning_row)
 
     return input_service.ask_play_again()
 
@@ -30,16 +27,15 @@ def run_game():
 colorama.init()
 input_service = InputService()
 player_1, player_2 = input_service.create_players()
-game_history = {player_1.name: 0, player_2.name: 0, 'tie': 0}
+display_service = DisplayService(player_1, player_2)
+display_service.display_board(input_service.game_board)
 while True:
     play_again = run_game()
     if play_again.upper() == 'N':
         print('Game ends.. Bye !')
-        print('-----------------------------------------------')
-        for name in game_history:
-            print(f'|          {name}       |         {game_history[name]}           |')
-        print('-----------------------------------------------')
+        display_service.display_final_score()
         break
     else:
         print('\n' * 10)
         input_service.reset_board()
+        display_service.display_board(input_service.game_board)
