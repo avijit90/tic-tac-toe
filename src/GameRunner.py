@@ -1,4 +1,10 @@
+import sys
+from pathlib import Path
+
 import colorama
+
+RUNNER_DIR = Path(__file__).resolve().parent / 'com' / 'runner'
+sys.path.insert(0, str(RUNNER_DIR))
 
 from DisplayService import DisplayService
 from InputService import InputService
